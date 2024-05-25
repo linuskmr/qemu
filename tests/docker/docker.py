@@ -186,7 +186,7 @@ def _check_binfmt_misc(executable):
               (binary))
         return None, True
 
-    m = re.search("interpreter (\S+)\n", entry)
+    m = re.search("interpreter (\\S+)\n", entry)
     interp = m.group(1)
     if interp and interp != executable:
         print("binfmt_misc for %s does not point to %s, using %s" %
@@ -312,7 +312,7 @@ class Docker(object):
         checksum = _text_checksum(_dockerfile_preprocess(dockerfile))
 
         if registry is not None:
-            sources = re.findall("FROM qemu\/(.*)", dockerfile)
+            sources = re.findall("FROM qemu\\/(.*)", dockerfile)
             # Fetch any cache layers we can, may fail
             for s in sources:
                 pull_args = ["pull", "%s/qemu/%s" % (registry, s)]
